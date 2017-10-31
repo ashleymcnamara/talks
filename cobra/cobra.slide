@@ -1,0 +1,129 @@
+Building Command Line Apps in Go 
+Tags: cobra, command line, cli
+
+Brian Ketelsen
+Cloud Developer Advocate, Microsoft
+bketelsen@gmail.com
+https://brianketelsen.com
+@bketelsen
+
+* Introduction
+
+What makes me an authority on command line apps in Go?
+
+- Go In Action http://manning.com
+- Go in production since 2010
+- GopherCon co-organizer https://gophercon.com
+- GoTime.FM co-host http://gotime.fm
+- Contributed to Kubernetes and Docker
+- Used every command line helper and stdlib
+
+
+* Command Line Apps
+
+Some of my favorite applications are command line apps. 
+
+- vim/neovim
+- awk, sed, grep, ls, top, etc.
+
+But interactive command line apps aren't the only time we build CLI apps.
+
+- Web servers
+- Microservices
+- Data servers (mysql, postgres, Redis, & friends)
+
+*All*of*these*apps*are*started*from*the*command*line.*
+
+* Commonalities of Command Line Apps
+
+    mysql server --listen-port=3306
+
+- command "mysql"
+- flags "--listen-port=3306"
+- arguments "server"
+
+All command line applications share these features; some may not use all of them.
+
+- command
+- flags
+- arguments
+
+* Command
+
+The command is the name of the application
+
+- mysql
+- awk
+- vi
+- redis
+- cmd.exe
+
+These are the NOUNS.
+
+* Arguments
+
+Arguments instruct the command on your intention.
+
+- buffalo dev
+- npm install
+- go get
+
+These are the VERBS.
+
+* Flags
+
+Flags modify behavior of the command or arguments.
+
+- listen=:6060
+- no-cache
+- g (global)
+
+These are the ADVERBS.
+
+Flags can *also* be positional.  This means they apply to a specific argument.
+
+    myapp server --listen=:8080 // listen modifies server
+    myapp --insecure-mode server // --insecure-mode modifies "myapp"
+
+* What's the Point of This?
+
+You may wonder why any of this matters.  The simple reason is that parsing arguments and flags is HARD.
+
+So hard that there are standards, and C libraries, and Python packages that implement the standards.
+
+So hard that I don't really want to build an app if it has to have multiple positional flags.
+
+* Enter Cobra
+
+.link https://github.com/spf13/cobra github.com/spf13/cobra
+
+Cobra is both a library for creating powerful modern CLI
+applications as well as a program to generate applications
+and command files.
+
+* Cobra Users
+
+- Kubernetes
+- Docker
+- etcd
+- OpenShift
+- Delve
+- GopherJS
+- CockroachDB
+- ...
+
+* Why Did Everyone Choose Cobra?
+
+It's not just [[https://en.wikipedia.org/wiki/Cargo_cult][cargo culting]].
+
+Cobra is a *library* that helps you build CLI apps easily.
+
+Cobra is also a *CLI*Application* that generates the boilerplate for your apps.
+
+* [demo] trainctl
+
+* [demo] Create a new Cobra Application
+
+
+
+
