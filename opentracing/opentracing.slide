@@ -1,0 +1,215 @@
+OpenTracing in Go
+Tags: distributed, tracing, opentracing
+
+Brian Ketelsen
+Cloud Developer Advocate, Microsoft
+bketelsen@gmail.com
+https://brianketelsen.com
+@bketelsen
+
+* Introduction
+
+My Street Cred:
+
+- Go In Action http://manning.com
+- Go in production since 2010
+- GopherCon co-organizer https://gophercon.com
+- GoTime.FM co-host http://gotime.fm
+
+* What Is OpenTracing
+
+"A vendor-neutral standard for distributed tracing."
+
+.link https://opentracing.io OpenTracing.io
+
+* Why Do We Need OpenTracing?
+
+- Very few applications are monolith/standalone anymore
+- It's HARD to correlate output from different systems into a cohesive story
+- More and more systems are moving to microservices
+
+* OpenTracing Concepts
+
+- Trace
+
+A `trace` is a group of collected metrics from a single end-to-end distributed process.  It includes collected metrics from all child processes, RPC calls, HTTP requests, and any other process that can be instrumented.
+
+From the point your request hits a server to the point the response is returned, everything in the middle is a Trace.
+
+
+* OpenTracing Concepts
+
+- Span
+
+A `span` is a single collection of data that belongs to a trace.  Spans can have any scope, but are frequently created to distinguish individual functions, RPC requests, HTTP requests, or any sub-component of your system that you wish to measure and observe individually.
+
+A `trace` is composed of one or more `spans`.
+
+* OpenTracing Concepts
+
+.image spans.png 500 _
+
+* OpenTracing Concepts
+
+Most commonly, developers choose to create one span per function in the call stack.
+
+    Main -> ServeHTTP -> HomeHandler -> GetData -> RPC Call -> Data Microservice
+
+
+* OpenTracing Concepts
+
+Internally, Spans can contain:
+
+- An operation name
+- A start timestamp
+- A finish timestamp
+- A set of zero or more key:value Span Tags.
+- A set of zero or more Span Logs, each of which is itself a key:value map paired with a timestamp.
+
+The start & end times are required.  Everything else is optional, but very useful.
+
+* OpenTracing Deployment
+
+An OpenTracing deployment consists of several components:
+
+- A collector, something to receive traces from running processes
+- A visualizer, usually a web application that allows you to view traces and spans
+- One or more instrumented applications
+
+Frequently the collector and visualizer are packaged together.  Often the collector has pluggable storage(s) that allow you to scale from laptop to production.  In-memory storage for local dev, and something heavier for production.
+
+* OpenTracing Implementations
+
+- Zipkin *
+- Jaeger *
+- Appdash *
+- LightStep (commercial) *
+- Instana (commercial)
+
+    * = I've used these
+
+* Demo
+
+Jaeger HotROD demo
+
+* OpenTracing In Practice
+
+- Run a collector
+- Connect to your collector from your app using collector specific library
+- Instrument your application with `opentracing/opentracing-go`
+
+If you change collectors, you only need to change the first two.
+
+
+* Connecting to the Collector (Jaeger)
+
+    cfg := config.Configuration{
+    Sampler: &config.SamplerConfig{
+        Type:  "const",
+        Param: 1,
+    },
+    Reporter: &config.ReporterConfig{
+        LogSpans:            true,
+        BufferFlushInterval: 1 * time.Second,
+    },
+    }
+    tracer, closer, err := cfg.New(
+        "your_service_name",
+        config.Logger(jaeger.StdLogger),
+    )
+    opentracing.SetGlobalTracer(tracer)
+    defer closer.Close()
+
+* Reporting a Span
+
+    func someFunction() {
+        parent := opentracing.GlobalTracer().StartSpan("some") // any name is OK
+        defer parent.Finish()
+        // do function work
+    }
+
+
+* Creating Child Spans
+
+    func someFunction() {
+        parent := opentracing.GlobalTracer().StartSpan("some") // any name is OK
+        defer parent.Finish()
+        // do function work
+        someChild(parent)
+    }
+    func someChild(sp opentracing.Span) {
+        child := opentracing.GlobalTracer().StartSpan(
+            "world", opentracing.ChildOf(parent.Context()))
+        defer child.Finish()
+    }
+
+* The Easy Button
+
+Use StartSpanFromContext() and propagate spans with Go's context
+
+    func xyz(ctx context.Context, ...) {
+        span, ctx := opentracing.StartSpanFromContext(ctx, "xyz")
+        defer span.Finish()
+        span.LogFields(
+            log.String("event", "soft error"),
+            log.String("type", "cache timeout"),
+            log.Int("waited.millis", 1500))
+        ...
+
+If `ctx` contains a span, the `span` variable will be a child of it.  If it doesn't contain a span, `span` will be a parent span.
+
+
+* The Easy Button
+
+Inject the span into your context using ContextWithSpan()
+Create a child with StartSpanFromContext()
+
+    func someFunction() {
+        parent := opentracing.GlobalTracer().StartSpan("some") // any name is OK
+        defer parent.Finish()
+        // do function work
+        ctx := opentracing.ContextWithSpan(context.Background(), parent)
+        someChild(ctx)
+    }
+    func someChild(ctx Context) {
+        sp := openTracing.StartSpanFromContext(ctx,"child")
+        defer sp.Finish()
+    }
+
+* Clutter Everywhere
+
+Instrumenting your application with OpenTracing adds another layer of clutter to your function definitions.
+
+You were already doing logging and metrics collection.  Now you've added spans.
+
+    func someFunction() {
+        parent := opentracing.GlobalTracer().StartSpan("some") // any name is OK
+        defer parent.Finish()
+        // prometheus metrics here
+        // and here
+        actual code ...
+        // logging here
+        actual code
+        // more metrics
+        // more logging
+        someChild(parent)
+    }
+
+You have now lost all the beautiful readability that Go gives us.
+
+
+* The Solution
+
+Wrap It Up
+
+Here's an example for `net/trace` (not OpenTracing): [[https://github.com/bketelsen/trace][trace]]
+
+Although this isn't rewritten yet for OpenTracing, the same concepts apply:
+
+Wrap metrics, logging, and tracing into a single `span` object, decluttering your function calls dramatically.
+
+- each span is automatically reported to metrics for call count and timing
+- span has Log() functions that log to your logger and attach logs to the span
+- context propagation is built in
+
+
