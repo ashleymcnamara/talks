@@ -120,10 +120,8 @@ Cobra is a *library* that helps you build CLI apps easily.
 
 Cobra is also a *CLI*Application* that generates the boilerplate for your apps.
 
-* [demo] trainctl
-
 * [demo] Create a new Cobra Application
 
-
+* [demo] trainctl
 
 
