@@ -51,7 +51,6 @@ https://brianketelsen.com
 
 : I'm only tangentially invested in Windows.  Windows 10 (with the new Windows Subsystem for Linux) provides a decent place to do Linux development while providing "grown up tools" for things like VPNs, Email, and Office Applications.  
 
-: Despite the fact that I work for Microsoft, I really haven't cared that much about Windows. Until WSL came out last year, I hadn't touched Windows since 2007 or earlier.
 
 * Numbers Game
 
@@ -207,7 +206,7 @@ http://start.spring.io
 - Write your version of _Why's Poignant Guide To Ruby 
    community curated, open source resources for learning Go
 
-Announcing learn-golang.com - crowd sourced Go book targeted at experienced developers coming from other languages.
+: Announcing learn-golang.com - crowd sourced Go book targeted at experienced developers coming from other languages.  Initial push of content will come from my training material, but it is just a starting point.  All contributions welcomed, large and small.
 
 * Standardize, Reduce Choices
 
@@ -217,7 +216,7 @@ Announcing learn-golang.com - crowd sourced Go book targeted at experienced deve
 
 go-kit but at the Apache-Commons level!
 
-Announcing gopher.rocks/commons - apache-commons for Go
+Announcing gopher.rocks/commons - apache-commons for Go.  The package one step above standard library for code that we all write over and over.
 
 * Fin 
 
