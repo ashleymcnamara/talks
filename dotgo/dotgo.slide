@@ -186,9 +186,9 @@ http://start.spring.io
 
 * Back to You  - The Ask
 
-: You may never build an enterprise application in Go.  But the coming influx of Enterprise developers will benefit you tremendously.  More enterprise development in Go means demand for more Go developers, it means better tooling, better support for Go across service providers. 
+: You may never build an enterprise application in Go.  But the influx of Enterprise developers will benefit you tremendously.  More enterprise development in Go means demand for more Go developers, it means better tooling, better support for Go across service providers. 
 
-: The enterprise isn't coming to Go, it's already here.  If we help to make them welcome and successful, we have an opportunity to take Go's growth to the next level, exponential growth.  The coveted hockey stick.  If we continue to ignore them, they'll go somewhere else.  Rust, Ruby, Node. 
+: The first wave of Enterprise development in Go is already here.  If we help to make them welcome and successful, we have an opportunity to take Go's growth to the next level, exponential growth.  The coveted hockey stick.  If we continue to ignore them, they'll go somewhere else.  Rust, Ruby, Node. maybe even Pony. 
 
 
 * Logging
