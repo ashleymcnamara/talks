@@ -127,49 +127,88 @@ Missing In Action
 
 : depending on your definition of Centrally Managed, I'm going to say that Go doesn't satisfy this requirement.  
 
-- Unified Logging targets and formats
+- Unified logging targets and formats
+- Centralized configuration
+
+* Logging 
+
+: Logging in Go is a dumpster fire.  My biggest wish for Go 2.0 is a logger interface.  Let's solve this problem the right way in Go 2 and allow the operator, the final consumer of both packages and commands to determine how logs are formatted and stored.
+
+: A log interface could be satisfied by a simple text file logger or a complicated log shipping package that logs to something centralized. 
+
+* Centralized Configuration
+
+: Windows has Active Directory for centralized policy management.  It can control nearly everything about a user's experience, and nearly everything about the configuration of desktop clients and servers.
+
+: Enterprise software installations are also frequently controlled by central configuration systems.  An operator can make changes in a central configuration system, and the software is automatically re-configured, even if instances are currently running.
+
+: How does this translate in Go?  We often try to build 12-factor applications with the application accepting its configuration from the environment or the command line.  Some tools like SFP13/viper allow you to set configuration from environment, command line, and even distributed key/value stores like etcd/consul.  
+
+: the typical Go app is not expected to change configuration after it's started.  But building applications in a way where configuration values changing triggers application changes isn't difficult.  We need good library support at a storage-agnostic level. The best example I've seen yet is Go-Micro's config-srv.  It has built-in support for storing configuration in JSON format and supports watching configuration keys for easier reconfiguration of a running application.
+
+* Frameworks and Ecosystems 
+
+: Enterprise development in Java and .Net is currently easier than in Go, not because the languages are better suited for enterprise development, but because there are already frameworks that are built for enterprise development.
+
+: We often poke fun at Spring Boot and other similar frameworks. Go developers don't need frameworks!  USE THE STANDARD LIBRARY! Have you stopped to think about why they're so popular? Because they provide templates to solve common problems that have already been tested and proven in the enterprise.  Enterprise developers don't have time to reinvent the wheel every time they want to solve a problem.  They need to apply known-good patterns and ship software so they can keep the business running.
+
+: Where is the Spring Boot for Go?
+
+* Software OSI Model 
+
+- Enterprise Applications
+- ??
+- Frameworks & Toolkits (go-kit, Go Micro, Buffalo)
+- Packages (net/http) 
+- Standard Library 
+- Operating system / Kernel
+
+: We're missing a critical piece of the model to enable enterprise development.  We have an amazing standard library, and really well-designed toolkits like go-kit and Micro, but they operate at a level one step below the developers who are coming to Go.  We need an opinionated framework like Spring Boot for Go that is built ON those frameworks and toolkits.
+
+* Spring Initializr
+
+http://start.spring.io
+
+.image start-spring-io.png 500 600
+
+: This website generates the entire project, with everything configured and gives you a zip file as the output.  If you click on the "Switch to full version" link, you can change all the defaults.  Truly impressive.
+
+* Generators
+
+.image yeoman.png 500 600
+: Nearly Every javascript framework has an equivalent Yeoman generator.  Go is behind the curve here.  Projects like micro and buffalo do a great job, but this should be the standard for every Go framework or toolkit.
+
+* Just Use The Standard Library
+
+: This saying needs to go away.  It makes sense when we're talking about low-level packages, and even bespoke software.  But as a mentality, it is off-putting to developers coming to Go.  
 
 
-* ------
+* Back to You  - The Ask
 
-* Open Source: Scratching Your Own Itch and Sharing
+: You may never build an enterprise application in Go.  But the coming influx of Enterprise developers will benefit you tremendously.  More enterprise development in Go means demand for more Go developers, it means better tooling, better support for Go across service providers. 
 
-: Open Source software isn't generally considered altruistic.  We write Open Source software to fill a void, to meet a personal need.  We share it because of our beliefs in the ethos of Open Source, to help to build a better world where others looking to solve that problem won't have to solve it themselves, but can instead use, or at least build upon your solution.
-
-* Is Open Source Go Ready for the Enterprise?
-
-No.
-
-* Missing In Action 
- 
-- Solid {MSSQL,Oracle,Sybase,etc} Drivers
-- Solid LDAP/AD integrations
-- Simple toolkits and frameworks to facilitate rapid development
-
-* The Missing Libraries 
-
-: These libraries and drivers will come.  As companies adopt Go they'll create them if they don't already exist.  They may not make them Open Source, depending on their corporate policies.  But the library problem will eventually be solved by people who have an itch to scratch.
+: The enterprise isn't coming to Go, it's already here.  If we help to make them welcome and successful, we have an opportunity to take Go's growth to the next level, exponential growth.  The coveted hockey stick.  If we continue to ignore them, they'll go somewhere else.  Rust, Ruby, Node. 
 
 
-* Below Here is just notes
+* Logging
 
-* Need a bigger toolkit
-* Go-Kit is awesome.  Only covers microservices
-* where's the go-kit for concurrency
-    distributed computing
-    services
+- Fix Logging in Go 2.0 or SOONER
+   make logging an interface, build your fancy things on top
 
-* Nameko in python
-* Microservice4Net - .net
+* Frameworks
 
-They have annotations, awesome code generators, beautiful websites that create an entire project ready to be filled in with business logic
+- Start to think above the toolkit
+   today we're plumbers, but we need to plan for the General Contractors
 
-* Every Node framework has a Yeoman generator
+* Helpful Resources for Newcomers
 
+- Write your version of _Why's Poignant Guide To Ruby 
+   community curated, open source resources for learning Go
 
+* Standardize, Reduce Choices
 
+- Consolidate and standardize where you can
+   work with others to build consistency in our ecosystem
+   find best-practices and make them stand-alone packages
 
-* Project Generators
-
-Spring Initializr - start.spring.io
-
+go-kit but at the Apache-Commons level!
