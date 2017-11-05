@@ -44,6 +44,8 @@ https://brianketelsen.com
 
     https://www.statista.com/statistics/218089/global-market-share-of-windows-7/
 
+.image switcher.png
+
 
 * Real Talk
 
@@ -78,7 +80,7 @@ https://en.wikipedia.org/wiki/Enterprise_software
 
 * Enterprise Developers are Different
 
-: I spent 15 years writing Enterprise software.  From line of business applications to large corporate wide data management, I've got a good bit of experience writing software for big enterprise.
+: I spent 15 years writing Enterprise software.  From line of business applications to large corporate wide data management, I've got a good bit of experience writing software for big companies.
 
 : Enterprise developers are different.  Not because they think differently, not because they like different tools, but because they have different boundaries and constraints than OSS developers.
 
@@ -86,7 +88,7 @@ https://en.wikipedia.org/wiki/Enterprise_software
 
 : Enterprise developers are often writing applications that talk to internal data storage systems that help organize and orchestrate business processes.  Their applications have a built-in captive audience for which they can make several assumptions. 
 
-* Entrprise Software
+* Enterprise Software
 
 - User is known
 - Platform is known, both for deployment and consumption
@@ -112,7 +114,7 @@ https://en.wikipedia.org/wiki/Enterprise_software
 
 * Robustness 
 
-: Go really performs well here.  By encouraging developers to pay attention to every possible error condition and handle those errors on the spot, Go facilitates robust software development.  Another checkmark in Go's readiness column
+: Go really performs well here.  By encouraging developers to pay attention to every possible error condition and handle those errors on the spot, Go facilitates robust software development.  Another checkmark in Go's enterprise readiness column
 
 * Interfaces to Other Enterprise Software 
 
@@ -163,7 +165,7 @@ Missing In Action
 - Standard Library 
 - Operating system / Kernel
 
-: We're missing a critical piece of the model to enable enterprise development.  We have an amazing standard library, and really well-designed toolkits like go-kit and Micro, but they operate at a level one step below the developers who are coming to Go.  We need an opinionated framework like Spring Boot for Go that is built ON those frameworks and toolkits.
+: We're missing a critical piece of the model to enable enterprise development.  We have an amazing standard library, and really well-designed toolkits like go-kit and Micro, but they operate at a level one step below the developers who are coming to Go.  We need an opinionated framework like Spring Boot for Go that is built ON top of those frameworks and toolkits.
 
 * Spring Initializr
 
@@ -205,6 +207,8 @@ http://start.spring.io
 - Write your version of _Why's Poignant Guide To Ruby 
    community curated, open source resources for learning Go
 
+Announcing learn-golang.com - crowd sourced Go book targeted at experienced developers coming from other languages.
+
 * Standardize, Reduce Choices
 
 - Consolidate and standardize where you can
@@ -212,3 +216,10 @@ http://start.spring.io
    find best-practices and make them stand-alone packages
 
 go-kit but at the Apache-Commons level!
+
+Announcing gopher.rocks/commons - apache-commons for Go
+
+* Fin 
+
+: My request to you is simple.  Join with me to make Go the best place for newcomers.  As Dave Cheney is fond of saying: A rising tide floats all boats.
+: Let's make it rain!
