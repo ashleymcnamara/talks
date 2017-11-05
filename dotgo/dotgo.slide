@@ -1,0 +1,175 @@
+Preparing for the Next Wave
+Tags: enterprise, go, corporate, future
+
+Brian Ketelsen
+Cloud Developer Advocate, Microsoft
+bketelsen@gmail.com
+https://brianketelsen.com
+@bketelsen
+
+* It's Personal
+
+: In 2010 I deployed my first Go service to production.  It was a rewrite of a Ruby service that desperately needed concurrency to meet our SLA.  After I figured out how to use goroutines effectively it was a smashing success.  I spent the next three years applying Go to fix business problems that demanded Go's concurrency.  Together with Erik St. Martin, I built SkyNet which was a microservices platform probably just a few years ahead of its time.  SkyNet lives today, however, in the form of the DNS infrastructure in Kubernetes.
+: In 2013 I co-founded a data science startup that used Go exclusively for its customer facing applications.  Hundreds of millions of transactions per day flowed through the system.  Go was predictable, reliable, and perhaps more importantly -- productive.
+
+* I'm Invested in Go
+
+: in 2016 I decided to leave the the startup world and make my living training Go and Kubernetes.  It was the best decision I've ever made.  I got to spend almost two years sharing my passion for Go with companies big and small.
+
+: It was during this time that I realized that Go is here to stay.  So many big companies are investing heavily in Go... it's not just confined to the domain of startups.  The companies that hired me to train them in Go are in the Fortune 500, in the Fortune 100, and even Fortune 50.  Large companies are adopting Go for the same reasons I did.
+
+* Today
+
+: fast forward to 2017, and I got the opportunity to work at Microsoft.  It wasn't on my radar, and it was certainly a surprise.  But ultimately it fit with my personal goal to further the adoption and success of Go.  Microsoft didn't just "allow me" to continue to foster the Go community, they hired me because of that passion.  Microsoft sees the value in Go.  They didn't hire me in spite of being a GopherCon organizer, they hired me because of it.
+
+
+* The Enterprise Moves Towards OSS
+
+: I saw an article yesterday stating that Azure is composed of 40% linux deployments now.  
+
+: A company that built its story on Windows has 40% of its deployments on Linux. Think about that for a moment.  The company that was built on Windows has transformed itself so much in the past 3 years that 40% of its cloud servers are Linux.
+
+: clearly the enterprise is moving towards Open Source.  The evidence is clear:  Large companies like IBM, Apple, Microsoft, and Google have a huge investment in Open Source.  In Linux.  And from my experience over the past two years teaching, they have an investment in Go.
+
+* Is Go Moving Towards the Enterprise?
+
+* What is the Enterprise?
+
+: As of July 2017 desktop market share looks like this: (1)
+
+    85% Windows
+    11% MacOS
+     2%  Linux
+    .5% ChromeOS
+
+    https://www.statista.com/statistics/218089/global-market-share-of-windows-7/
+
+
+* Real Talk
+
+: I'm only tangentially invested in Windows.  Windows 10 (with the new Windows Subsystem for Linux) provides a decent place to do Linux development while providing "grown up tools" for things like VPNs, Email, and Office Applications.  
+
+: Despite the fact that I work for Microsoft, I really haven't cared that much about Windows. Until WSL came out last year, I hadn't touched Windows since 2007 or earlier.
+
+* Numbers Game
+
+: But let's be honest amongst ourselves.  If 85% of the desktops in the world are running Windows, we're doing a disservice to potential Gophers by de-prioritizing Windows issues in Go, and ignoring enterprise software as a target for Go applications.
+
+: As enterprise companies embrace OSS, Linux, and Go, we're in a fragile position. The Go programming language, and a vast majority of its libraries are built for an open source, cloud native platform.  Is that representative of the vast majority of potential Go users?  
+
+* NOPE
+
+* Enterprise Software is Different 
+
+"Enterprise Software describes a collection of computer programs with common business applications, tools for modeling how the entire organization works, and development tools for building applications unique to the organization. The software is intended to solve an enterprise-wide problem, rather than a departmental problem. Enterprise level software aims to improve the enterprise's productivity and efficiency by providing business logic support functionality."
+
+* Continued 
+
+"According to Martin Fowler, 'Enterprise applications are about the display, manipulation, and storage of large amounts of often complex data and the support or automation of business processes with that data.'"
+
+* Continued
+
+"Although there is no single, widely accepted list of enterprise software characteristics, they generally include performance, scalability, and robustness. Furthermore, enterprise software typically has interfaces to other enterprise software (for example LDAP to directory services) and is centrally managed (a single admin page, for example)."
+
+Wikipedia
+https://en.wikipedia.org/wiki/Enterprise_software
+
+* How is Go Positioned to Create Enterprise Software?
+
+* Enterprise Developers are Different
+
+: I spent 15 years writing Enterprise software.  From line of business applications to large corporate wide data management, I've got a good bit of experience writing software for big enterprise.
+
+: Enterprise developers are different.  Not because they think differently, not because they like different tools, but because they have different boundaries and constraints than OSS developers.
+
+: In a way, it's liberating.  Writing an OSS app that requires some form of authentication can be frustrating - do we use OAUTH? Keep our own database of users?  In the enterprise, that database already exists.  It's LDAP, and more than likely Active Directory. Problem solved.   mysql, postgres, mongodb?  Problem solved, it's Oracle and Microsoft SQL Server.
+
+: Enterprise developers are often writing applications that talk to internal data storage systems that help organize and orchestrate business processes.  Their applications have a built-in captive audience for which they can make several assumptions. 
+
+* Entrprise Software
+
+- User is known
+- Platform is known, both for deployment and consumption
+- Data sources are known, and constrained  
+
+* Please Bring This Back Around To Go, Brian??
+
+* Using Go for Enterprise Software development
+
+- Performance
+- Scalability
+- Robustness
+- Interfaces to other Enterprise Software
+- Centrally Managed
+
+* Performace
+
+: I won't claim that Go is the fastest programming language on the planet.  But I will claim that this is a non-issue for the purposes of this talk.  Go is fast, and it gets faster and better with every release. I've never tried to solve a problem that Go was too slow for.
+
+* Scalability
+
+: Again, Go shines here.  It's easy to scale vertically and horizontally with Go applications.  Go will use all the cores available to it, and deploying multiple copies of a service behind a load-balancer is a solved problem.  We're good here too.
+
+* Robustness 
+
+: Go really performs well here.  By encouraging developers to pay attention to every possible error condition and handle those errors on the spot, Go facilitates robust software development.  Another checkmark in Go's readiness column
+
+* Interfaces to Other Enterprise Software 
+
+: Not so good here.
+
+Missing In Action 
+ 
+- Solid {MSSQL,Oracle,Sybase,etc} Drivers
+- Solid LDAP/AD integrations
+
+* Centrally Managed
+
+: depending on your definition of Centrally Managed, I'm going to say that Go doesn't satisfy this requirement.  
+
+- Unified Logging targets and formats
+
+
+* ------
+
+* Open Source: Scratching Your Own Itch and Sharing
+
+: Open Source software isn't generally considered altruistic.  We write Open Source software to fill a void, to meet a personal need.  We share it because of our beliefs in the ethos of Open Source, to help to build a better world where others looking to solve that problem won't have to solve it themselves, but can instead use, or at least build upon your solution.
+
+* Is Open Source Go Ready for the Enterprise?
+
+No.
+
+* Missing In Action 
+ 
+- Solid {MSSQL,Oracle,Sybase,etc} Drivers
+- Solid LDAP/AD integrations
+- Simple toolkits and frameworks to facilitate rapid development
+
+* The Missing Libraries 
+
+: These libraries and drivers will come.  As companies adopt Go they'll create them if they don't already exist.  They may not make them Open Source, depending on their corporate policies.  But the library problem will eventually be solved by people who have an itch to scratch.
+
+
+* Below Here is just notes
+
+* Need a bigger toolkit
+* Go-Kit is awesome.  Only covers microservices
+* where's the go-kit for concurrency
+    distributed computing
+    services
+
+* Nameko in python
+* Microservice4Net - .net
+
+They have annotations, awesome code generators, beautiful websites that create an entire project ready to be filled in with business logic
+
+* Every Node framework has a Yeoman generator
+
+
+
+
+* Project Generators
+
+Spring Initializr - start.spring.io
+
