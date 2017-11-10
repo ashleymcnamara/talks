@@ -1,0 +1,11 @@
+gophercon/vendor/
+**/*.log
+**/*.sqlite
+.idea/
+gophercon/bin/
+gophercon/tmp/
+gophercon/node_modules/
+gophercon/.sass-cache/
+gophercon/*-packr.go
+gophercon/public/assets/
+gophercon/gophercon

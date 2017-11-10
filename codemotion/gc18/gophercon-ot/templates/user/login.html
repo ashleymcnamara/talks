@@ -1,0 +1,9 @@
+
+<h1>User#Authenticate</h1>
+
+<%= form({action: userAuthenticatePath(), method:"POST"}) { %>
+Username: <input name="username"><br/>
+Password: <input type="password" name="password"><br/>
+Email: <input name="email"><br/>
+<button class="btn btn-success" role="submit">Login</button>
+<% } %>

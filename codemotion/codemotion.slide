@@ -1,0 +1,39 @@
+Microservices in Go with Micro
+Tags: microservices,micro,go
+
+Brian Ketelsen
+Cloud Developer Advocate, Microsoft
+bketelsen@gmail.com
+https://brianketelsen.com
+@bketelsen
+
+* Microservices in Go Using Micro
+
+[[Micro][https://micro.mu]]
+
+.image go-micro.png
+
+* Micro Is An Ecosystem
+
+- Framework
+- Toolkit
+- Pluggable Layers
+
+* Plugins Everywhere
+
+- message broker
+- encoding/decoding
+- transport
+- metrics
+
+Nearly every choice in `micro` has a sane default and many optional replacements.
+
+
+* Demo
+
+: micro new github.com/bketelsen/talks/codemotion/greeting
+
+
+
+
+
