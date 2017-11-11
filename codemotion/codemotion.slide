@@ -13,6 +13,20 @@ https://brianketelsen.com
 
 .image go-micro.png
 
+* About Me 
+
+- Co-Host gotime.fm weekly podcast
+- Co-Author "Go In Action" from Manning Press
+- Co-Organizer - GopherCon, Largest Go Conference in the World
+
+* This Talk 
+
+In this talk we will go from 0 to distributed microservices in less than an hour.
+
+Buckle up, Buttercup!
+
+.image buckleup.png
+
 * Micro Is An Ecosystem
 
 - Framework
@@ -31,7 +45,41 @@ Nearly every choice in `micro` has a sane default and many optional replacements
 
 * Demo
 
+New Microservice 
+
 : micro new github.com/bketelsen/talks/codemotion/greeting
+
+* Demo
+
+Calling a Service
+
+: micro web, micro api, curl
+
+* Demo
+
+More complex deployment
+
+- Authentication Service
+- Web Application with protected pages
+
+* Demo
+
+Add Profiles!
+
+
+* Demo 
+
+Distributed Tracing
+
+- OpenTracing
+
+* Demo
+
+Managing from Slack
+
+* Demo
+
+Custom Bot Commands
 
 
 
