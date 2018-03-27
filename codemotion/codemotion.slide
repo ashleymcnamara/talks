@@ -42,6 +42,75 @@ Buckle up, Buttercup!
 
 Nearly every choice in `micro` has a sane default and many optional replacements.
 
+* Abstractions
+
+.image go-micro.png
+
+* Broker
+
+Transportation for events.  Micro can emit events, and interested services can consume them and react.
+
+- HTTP (default)
+- Google PubSub
+- Kafka
+- MQTT
+- NATS
+- NSQ
+- RabbitMQ
+- Redis
+- Amazon SQS
+
+
+* Codec
+
+Encoding of messages before transport.
+
+- bsonrpc
+- jsonrpc
+- jsonrpc2
+- mercury
+- msgpackrpc
+- protorpc (default)
+
+* Registry
+
+Service Discovery
+
+- consul (default)
+- etcd 2 or 3
+- Eureka
+- gossip
+- kubernetes
+- mdns (Multicast DNS)
+- NATS 
+- zookeeper
+
+* Selector
+
+How clients choose an instance of a service.
+
+- blacklist -- circuit breaker pattern for selecting service instances
+- cache -- random hash choice
+- label -- priority based labels, use for prioritized selection
+- named -- use with message bus/queue transport
+- static -- for use with upstream balancing
+
+* Transport
+
+Physical transport of messages.
+
+- grpc
+- http (default)
+- NATS
+- RabbitMQ
+- TCP
+- UTP (UDP variation of BitTorrent protocol)
+
+* Batteries Included
+
+All of these choices can be overwhelming, but Micro defaults are perfect for development.
+
+In production, you can change any of the options without changing your code.
 
 * Demo
 
