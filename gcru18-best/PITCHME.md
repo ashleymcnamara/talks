@@ -13,7 +13,7 @@
 ## This Talk
 
 [https://cda.ms/jP](https://cda.ms/jP)
-
+[video](https://youtu.be/MzTcsI6tn-0)
 
 ---?image=assets/image/brian.jpeg&opacity=100%
 
